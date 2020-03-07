@@ -2,8 +2,7 @@ package pl.edu.pjatk.pamo.bmicalculator;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,8 +10,24 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Map;
+
+import pl.edu.pjatk.pamo.bmicalculator.model.Person;
+import pl.edu.pjatk.pamo.bmicalculator.service.BmiCalculator;
+import pl.edu.pjatk.pamo.bmicalculator.service.BmiGroupFormValidator;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private BmiCalculator bmiCalculator;
+    private BmiGroupFormValidator bmiGroupFormValidator;
+
+    private TextInputLayout height;
+    private TextInputLayout weight;
+    private Button button;
+    private TextView ouput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +36,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initLayoutObject();
+        initObject();
+        addListener();
+    }
+
+    private void initLayoutObject(){
+        height = findViewById(R.id.height);
+        weight = findViewById(R.id.weight);
+        button = findViewById(R.id.button);
+        ouput = findViewById(R.id.output);
+    }
+
+    private void initObject() {
+        bmiGroupFormValidator = new BmiGroupFormValidator(height,weight);
+        bmiCalculator = new BmiCalculator();
+    }
+
+    private void addListener() {
+        height.getEditText().addTextChangedListener(bmiGroupFormValidator.getHeightTextWatcher());
+        weight.getEditText().addTextChangedListener(bmiGroupFormValidator.getWeightTextWatcher());
+        button.setOnClickListener(this);
     }
 
     @Override
@@ -40,16 +68,44 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onClick(View v) {
+        if(!bmiGroupFormValidator.isValid()) {
+            return;
+        }
+
+        Person person = createPerson();
+
+        Map.Entry<Double,String> bmi = bmiCalculator.calculateBmiWithCategory(
+                        person.getHeight(),
+                        person.getWeight()
+                );
+
+        ouput.setText("Your bmi is : " + bmi.getKey()+ " : " + bmi.getValue() );
+    }
+
+    private Person createPerson() {
+        try {
+            double weightInput = Double.parseDouble(weight.getEditText().getText().toString().trim());
+            double heightInput = Double.parseDouble(height.getEditText().getText().toString().trim());
+            return new Person(heightInput, weightInput);
+        } catch (NumberFormatException e) {
+            weight.setError("Wrong input data");
+            return null;
+        }
+
+    }
+
+
+
+
 }
