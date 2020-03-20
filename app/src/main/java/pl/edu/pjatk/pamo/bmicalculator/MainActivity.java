@@ -1,62 +1,41 @@
 package pl.edu.pjatk.pamo.bmicalculator;
 
+import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.textfield.TextInputLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-
-import java.util.Map;
+import androidx.fragment.app.FragmentManager;
 
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
-import pl.edu.pjatk.pamo.bmicalculator.service.BmiCalculator;
-import pl.edu.pjatk.pamo.bmicalculator.service.BmiGroupFormValidator;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private BmiCalculator bmiCalculator;
-    private BmiGroupFormValidator bmiGroupFormValidator;
+import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthInfo.newInstancePersonHealthInfo;
+import static pl.edu.pjatk.pamo.bmicalculator.StartFragment.newInstanceStarFragment;
 
-    private TextInputLayout height;
-    private TextInputLayout weight;
-    private Button button;
-    private TextView ouput;
-
+public class MainActivity extends AppCompatActivity implements StartFragment.OnStartFragmentInteractionListener, PersonHealthInfo.OnPersonHealthInfoListener {
+    private FragmentManager fragmentManager;
+    private Person person = new Person();
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.bundle = savedInstanceState;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initLayoutObject();
-        initObject();
-        addListener();
-    }
+        this.fragmentManager = getSupportFragmentManager();
 
-    private void initLayoutObject(){
-        height = findViewById(R.id.height);
-        weight = findViewById(R.id.weight);
-        button = findViewById(R.id.button);
-        ouput = findViewById(R.id.output);
-    }
+        if (savedInstanceState == null) {
 
-    private void initObject() {
-        bmiGroupFormValidator = new BmiGroupFormValidator(height,weight);
-        bmiCalculator = new BmiCalculator();
-    }
+            StartFragment startFragment1 = newInstanceStarFragment();
+            this.fragmentManager.beginTransaction()
+                    .add(R.id.fragment, startFragment1).commit();
+        }
 
-    private void addListener() {
-        height.getEditText().addTextChangedListener(bmiGroupFormValidator.getHeightTextWatcher());
-        weight.getEditText().addTextChangedListener(bmiGroupFormValidator.getWeightTextWatcher());
-        button.setOnClickListener(this);
     }
 
     @Override
@@ -78,34 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        if(!bmiGroupFormValidator.isValid()) {
-            return;
-        }
+    public void onStartFragmentInteraction(Person person) {
+        this.person = person;
 
-        Person person = createPerson();
+        PersonHealthInfo personHealthInfo = newInstancePersonHealthInfo(person);
 
-        Map.Entry<Double,String> bmi = bmiCalculator.calculateBmiWithCategory(
-                        person.getHeight(),
-                        person.getWeight()
-                );
-
-        ouput.setText("Your bmi is : " + bmi.getKey()+ " : " + bmi.getValue() );
-    }
-
-    private Person createPerson() {
-        try {
-            double weightInput = Double.parseDouble(weight.getEditText().getText().toString().trim());
-            double heightInput = Double.parseDouble(height.getEditText().getText().toString().trim());
-            return new Person(heightInput, weightInput);
-        } catch (NumberFormatException e) {
-            weight.setError("Wrong input data");
-            return null;
-        }
+        this.fragmentManager.beginTransaction()
+                .replace(R.id.fragment, personHealthInfo).commit();
 
     }
 
+    @Override
+    public void OnPersonHealthInfoFragmentInteraction(Uri uri) {
 
-
-
+    }
 }
