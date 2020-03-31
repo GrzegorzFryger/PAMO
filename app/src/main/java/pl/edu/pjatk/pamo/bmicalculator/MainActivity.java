@@ -11,11 +11,12 @@ import androidx.fragment.app.FragmentManager;
 
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
-import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthInfo.newInstancePersonHealthInfo;
-import static pl.edu.pjatk.pamo.bmicalculator.StartFragment.newInstanceStarFragment;
+import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthDataFragment.newInstanceStarFragment;
+import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthResultFragment.newInstancePersonHealthResult;
 
-public class MainActivity extends AppCompatActivity implements StartFragment.OnStartFragmentInteractionListener, PersonHealthInfo.OnPersonHealthInfoListener {
+public class MainActivity extends AppCompatActivity implements PersonHealthDataFragment.OnStartFragmentInteractionListener, PersonHealthResultFragment.OnPersonHealthResultListener {
     private FragmentManager fragmentManager;
+
     private Person person = new Person();
     private Bundle bundle;
 
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity implements StartFragment.OnS
 
         if (savedInstanceState == null) {
 
-            StartFragment startFragment1 = newInstanceStarFragment();
+            PersonHealthDataFragment personHealthDataFragment1 = newInstanceStarFragment();
             this.fragmentManager.beginTransaction()
-                    .add(R.id.fragment, startFragment1).commit();
+                    .add(R.id.fragment, personHealthDataFragment1).commit();
         }
 
     }
@@ -60,15 +61,16 @@ public class MainActivity extends AppCompatActivity implements StartFragment.OnS
     public void onStartFragmentInteraction(Person person) {
         this.person = person;
 
-        PersonHealthInfo personHealthInfo = newInstancePersonHealthInfo(person);
+        PersonHealthResultFragment personHealthResultFragment = newInstancePersonHealthResult(person);
 
         this.fragmentManager.beginTransaction()
-                .replace(R.id.fragment, personHealthInfo).commit();
+                .replace(R.id.fragment, personHealthResultFragment).commit();
 
     }
 
+
     @Override
-    public void OnPersonHealthInfoFragmentInteraction(Uri uri) {
+    public void OnPersonHealthResultFragmentInteraction(Uri uri) {
 
     }
 }

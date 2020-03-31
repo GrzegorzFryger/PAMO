@@ -18,19 +18,19 @@ import pl.edu.pjatk.pamo.bmicalculator.model.Person;
  * Activities that contain this fragment must implement the
  * {@link OnStartFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link StartFragment#newInstanceStarFragment} factory method to
+ * Use the {@link PersonHealthDataFragment#newInstanceStarFragment} factory method to
  * create an instance of this fragment.
  */
-public class StartFragment extends Fragment implements View.OnClickListener {
+public class PersonHealthDataFragment extends Fragment implements View.OnClickListener {
     private PersonForm personFrom;
     private Button button;
     private OnStartFragmentInteractionListener mListener;
 
-    public StartFragment() {
+    public PersonHealthDataFragment() {
     }
 
-    public static StartFragment newInstanceStarFragment() {
-        StartFragment fragment = new StartFragment();
+    public static PersonHealthDataFragment newInstanceStarFragment() {
+        PersonHealthDataFragment fragment = new PersonHealthDataFragment();
         Bundle args = new Bundle();
         args.putString("one","one");
         fragment.setArguments(args);
@@ -48,7 +48,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
 
-        View view = inflater.inflate(R.layout.fragment_start, container, false);
+        View view = inflater.inflate(R.layout.fragment_person_health_data, container, false);
         button = view.findViewById(R.id.button);
         button.setOnClickListener(this);
         personFrom = new PersonForm(view);

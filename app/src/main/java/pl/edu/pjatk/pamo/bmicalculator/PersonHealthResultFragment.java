@@ -16,9 +16,9 @@ import pl.edu.pjatk.pamo.bmicalculator.form.Bmi;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 import pl.edu.pjatk.pamo.bmicalculator.service.PersonHealthService;
 
-public class PersonHealthInfo extends Fragment  {
+public class PersonHealthResultFragment extends Fragment  {
     private static final String PERSON = "person";
-    private OnPersonHealthInfoListener mListener;
+    private OnPersonHealthResultListener mListener;
 
     private Person person;
     private PersonHealthService personHealthService;
@@ -27,12 +27,12 @@ public class PersonHealthInfo extends Fragment  {
     private TextView calories;
     private TextView recomendedDish;
 
-    public PersonHealthInfo() {
+    public PersonHealthResultFragment() {
         personHealthService = new PersonHealthService();
     }
 
-    public static PersonHealthInfo newInstancePersonHealthInfo(Person person) {
-        PersonHealthInfo fragment = new PersonHealthInfo();
+    public static PersonHealthResultFragment newInstancePersonHealthResult(Person person) {
+        PersonHealthResultFragment fragment = new PersonHealthResultFragment();
         Bundle args = new Bundle();
         args.putSerializable(PERSON, person);
         fragment.setArguments(args);
@@ -50,7 +50,7 @@ public class PersonHealthInfo extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_person_health_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_person_health_result, container, false);
         initOput(view);
         setOutput(view,person);
         return view;
@@ -59,11 +59,11 @@ public class PersonHealthInfo extends Fragment  {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnPersonHealthInfoListener) {
-            mListener = (OnPersonHealthInfoListener) context;
+        if (context instanceof OnPersonHealthResultListener) {
+            mListener = (OnPersonHealthResultListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnPersonHealthInfoListener");
+                    + " must implement OnPersonHealthResultListener");
         }
     }
 
@@ -73,9 +73,9 @@ public class PersonHealthInfo extends Fragment  {
         mListener = null;
     }
 
-    public interface OnPersonHealthInfoListener {
+    public interface OnPersonHealthResultListener {
         // TODO: Update argument type and name
-        void OnPersonHealthInfoFragmentInteraction(Uri uri);
+        void OnPersonHealthResultFragmentInteraction(Uri uri);
     }
 
     private void initOput(View view){
