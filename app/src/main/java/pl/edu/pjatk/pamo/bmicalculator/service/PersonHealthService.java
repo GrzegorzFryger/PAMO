@@ -2,7 +2,7 @@ package pl.edu.pjatk.pamo.bmicalculator.service;
 
 import java.util.Map;
 
-import pl.edu.pjatk.pamo.bmicalculator.form.Bmi;
+import pl.edu.pjatk.pamo.bmicalculator.model.Bmi;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
 public class PersonHealthService {

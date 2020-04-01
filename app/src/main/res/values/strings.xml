@@ -19,4 +19,13 @@
     <string name="chart">Charts Covid-19</string>
     <string name="title_activity_bmi">BmiActivity</string>
     <string name="title_activity_quiz">QuizActivity</string>
+    <string name="quiz_question">TextView</string>
+    <string name="answer3" />
+    <string name="answer4" />
+    <string name="answer1" />
+    <string name="answer2" />
+    <string name="question" />
+    <string name="reset">Reset</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
 </resources>

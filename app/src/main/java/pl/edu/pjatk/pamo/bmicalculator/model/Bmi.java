@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator.form;
+package pl.edu.pjatk.pamo.bmicalculator.model;
 
 public class Bmi {
     private Double bmi;

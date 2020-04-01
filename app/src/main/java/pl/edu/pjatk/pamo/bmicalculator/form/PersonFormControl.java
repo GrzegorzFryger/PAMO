@@ -11,7 +11,7 @@ import pl.edu.pjatk.pamo.bmicalculator.R;
 import pl.edu.pjatk.pamo.bmicalculator.model.Gender;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
-public class PersonForm {
+public class PersonFormControl {
     private View view;
     private TextInputLayout height;
     private TextInputLayout weight;
@@ -20,7 +20,7 @@ public class PersonForm {
 
     private PesonGroupFormValidator pesonGroupFormValidator;
 
-    public PersonForm(View view) {
+    public PersonFormControl(View view) {
         initLayoutObject(view);
         addListener();
     }

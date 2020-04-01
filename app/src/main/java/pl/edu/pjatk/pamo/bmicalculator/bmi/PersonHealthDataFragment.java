@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import pl.edu.pjatk.pamo.bmicalculator.R;
-import pl.edu.pjatk.pamo.bmicalculator.form.PersonForm;
+import pl.edu.pjatk.pamo.bmicalculator.form.PersonFormControl;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
 
@@ -23,7 +23,7 @@ import pl.edu.pjatk.pamo.bmicalculator.model.Person;
  * create an instance of this fragment.
  */
 public class PersonHealthDataFragment extends Fragment implements View.OnClickListener {
-    private PersonForm personFrom;
+    private PersonFormControl personFrom;
     private Button button;
     private OnStartFragmentInteractionListener mListener;
 
@@ -52,7 +52,7 @@ public class PersonHealthDataFragment extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_person_health_data, container, false);
         button = view.findViewById(R.id.button);
         button.setOnClickListener(this);
-        personFrom = new PersonForm(view);
+        personFrom = new PersonFormControl(view);
 
         return view;
     }
