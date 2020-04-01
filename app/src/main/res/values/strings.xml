@@ -14,4 +14,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="personal_health">Personal Health</string>
+    <string name="quiz">Quiz Covid-19</string>
+    <string name="chart">Charts Covid-19</string>
+    <string name="title_activity_bmi">BmiActivity</string>
+    <string name="title_activity_quiz">QuizActivity</string>
 </resources>

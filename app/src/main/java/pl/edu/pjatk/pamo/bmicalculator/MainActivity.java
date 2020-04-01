@@ -1,76 +1,54 @@
 package pl.edu.pjatk.pamo.bmicalculator;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
-import pl.edu.pjatk.pamo.bmicalculator.model.Person;
+import pl.edu.pjatk.pamo.bmicalculator.bmi.BmiActivity;
 
-import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthDataFragment.newInstanceStarFragment;
-import static pl.edu.pjatk.pamo.bmicalculator.PersonHealthResultFragment.newInstancePersonHealthResult;
 
-public class MainActivity extends AppCompatActivity implements PersonHealthDataFragment.OnStartFragmentInteractionListener, PersonHealthResultFragment.OnPersonHealthResultListener {
-    private FragmentManager fragmentManager;
-
-    private Person person = new Person();
+public class MainActivity extends AppCompatActivity implements AppMenuFragment.OnAppMenuFragmentInteractionListener {
     private Bundle bundle;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.bundle = savedInstanceState;
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         this.fragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
 
-            PersonHealthDataFragment personHealthDataFragment1 = newInstanceStarFragment();
+            AppMenuFragment personHealthDataFragment1 = AppMenuFragment.newInstance();
             this.fragmentManager.beginTransaction()
                     .add(R.id.fragment, personHealthDataFragment1).commit();
         }
-
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    public void onAppMenuInteraction(AppMenuFragment.Menu selected) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (selected) {
+            case HEALTH:
+                Intent i = new Intent(getBaseContext(), BmiActivity.class);
+                startActivity(i);
+                break;
+            case QUIZ:
+                Intent ij = new Intent(getBaseContext(), BmiActivity.class);
+                startActivity(ij);
+                break;
+            case CHART:
+                Intent ii = new Intent(getBaseContext(), BmiActivity.class);
+                startActivity(ii);
+                break;
 
-        if (id == R.id.action_settings) {
-            return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onStartFragmentInteraction(Person person) {
-        this.person = person;
-
-        PersonHealthResultFragment personHealthResultFragment = newInstancePersonHealthResult(person);
-
-        this.fragmentManager.beginTransaction()
-                .replace(R.id.fragment, personHealthResultFragment).commit();
-
-    }
-
-
-    @Override
-    public void OnPersonHealthResultFragmentInteraction(Uri uri) {
 
     }
 }

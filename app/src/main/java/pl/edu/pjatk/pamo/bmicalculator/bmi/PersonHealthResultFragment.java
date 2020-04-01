@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator;
+package pl.edu.pjatk.pamo.bmicalculator.bmi;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import java.text.DecimalFormat;
 
+import pl.edu.pjatk.pamo.bmicalculator.R;
 import pl.edu.pjatk.pamo.bmicalculator.form.Bmi;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 import pl.edu.pjatk.pamo.bmicalculator.service.PersonHealthService;

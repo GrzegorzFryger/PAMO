@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator;
+package pl.edu.pjatk.pamo.bmicalculator.bmi;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
+import pl.edu.pjatk.pamo.bmicalculator.R;
 import pl.edu.pjatk.pamo.bmicalculator.form.PersonForm;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
