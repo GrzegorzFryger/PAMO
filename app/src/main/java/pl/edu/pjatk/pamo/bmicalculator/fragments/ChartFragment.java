@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
 
@@ -22,7 +23,8 @@ import pl.edu.pjatk.pamo.bmicalculator.R;
  * create an instance of this fragment.
  */
 public class ChartFragment extends Fragment {
-
+    private static String HTTP_ADDRESS = "https://www.statista.com/statistics/1043366/novel-coronavirus-2019ncov-cases-worldwide-by-country/?fbclid=IwAR12z_y6B_oMoUd2tBeAePKpWVAkMbjxSg3Eh26ecidPbVJ2D00_G5cbCeU";
+    private WebView webview;
     private OnFragmentInteractionListener mListener;
 
     public ChartFragment() {
@@ -51,8 +53,14 @@ public class ChartFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        WebView wb = view.findViewById(R.id.webView1);
-        wb.loadUrl("https://www.google.com");
+
+        webview =view.findViewById(R.id.webView1);
+
+        webview.setWebViewClient(new WebViewClient());
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+        webview.loadUrl(HTTP_ADDRESS);
 
         return view;
     }
