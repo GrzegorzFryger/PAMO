@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator.quiz;
+package pl.edu.pjatk.pamo.bmicalculator.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,23 +16,23 @@ import pl.edu.pjatk.pamo.bmicalculator.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OnQuizStartFragmentInteractionListener} interface
+ * {@link ChartFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link QuizStartFragment#newInstance} factory method to
+ * Use the {@link ChartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuizStartFragment extends Fragment {
+public class ChartFragment extends Fragment {
 
-    private OnQuizStartFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
-    public QuizStartFragment() {
+    public ChartFragment() {
         // Required empty public constructor
     }
 
-    public static QuizStartFragment newInstance() {
-        QuizStartFragment fragment = new QuizStartFragment();
+    public static ChartFragment newInstance() {
+        ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
-        fragment.setArguments(args);
+               fragment.setArguments(args);
         return fragment;
     }
 
@@ -47,18 +48,25 @@ public class QuizStartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_start_fragemnt, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_chart, container, false);
+
+        WebView wb = view.findViewById(R.id.webView1);
+        wb.loadUrl("https://www.google.com");
+
+        return view;
     }
+
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnQuizStartFragmentInteractionListener) {
-            mListener = (OnQuizStartFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnQuizStartFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -68,8 +76,9 @@ public class QuizStartFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnQuizStartFragmentInteractionListener {
+
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onQuizStartFragmentInteraction(Uri uri);
+        void onChartFragmentInteraction(Uri uri);
     }
 }

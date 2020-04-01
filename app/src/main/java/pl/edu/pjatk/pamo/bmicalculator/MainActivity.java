@@ -6,8 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import pl.edu.pjatk.pamo.bmicalculator.bmi.BmiActivity;
-import pl.edu.pjatk.pamo.bmicalculator.quiz.QuizActivity;
+import pl.edu.pjatk.pamo.bmicalculator.fragments.AppMenuFragment;
 
 
 public class MainActivity extends AppCompatActivity implements AppMenuFragment.OnAppMenuFragmentInteractionListener {
@@ -44,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements AppMenuFragment.O
                 startActivity(quiz);
                 break;
             case CHART:
-                Intent ii = new Intent(getBaseContext(), BmiActivity.class);
-                startActivity(ii);
+                Intent chart = new Intent(getBaseContext(), ChartActivity.class);
+                startActivity(chart);
                 break;
 
         }

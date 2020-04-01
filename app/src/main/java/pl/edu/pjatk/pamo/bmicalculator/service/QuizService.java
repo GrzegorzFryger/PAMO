@@ -23,7 +23,7 @@ public class QuizService {
     }
 
     public void displayQuestion() {
-        if (this.currentQuestion < this.quizQuestions.size() - 1) {
+        if (this.currentQuestion < this.quizQuestions.size()) {
             this.quizFromControl.displayQuizQuestion(
                     this.quizQuestions.get(this.currentQuestion)
             );
@@ -32,7 +32,7 @@ public class QuizService {
 
 
     public void next() {
-        if (this.currentQuestion < this.quizQuestions.size() - 1) {
+        if (this.currentQuestion < this.quizQuestions.size()) {
             this.quizFromControl.clearColor();
             this.currentQuestion++;
         }
@@ -55,8 +55,14 @@ public class QuizService {
     }
 
     public void checkAnswer(Integer answer) {
-        this.userScore++;
-        this.quizFromControl.displayCorrectAnswer(this.quizQuestions.get(this.currentQuestion));
+        if (this.currentQuestion < this.quizQuestions.size()) {
+
+            if (this.quizQuestions.get(this.currentQuestion).getIdCorrectAnswer().equals(answer)) {
+                this.userScore++;
+            }
+            this.quizFromControl.displayCorrectAnswer(this.quizQuestions.get(this.currentQuestion));
+        }
+
     }
 
 

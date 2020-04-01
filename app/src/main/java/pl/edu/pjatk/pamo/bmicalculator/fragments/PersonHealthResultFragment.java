@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator.bmi;
+package pl.edu.pjatk.pamo.bmicalculator.fragments;
 
 import android.content.Context;
 import android.net.Uri;

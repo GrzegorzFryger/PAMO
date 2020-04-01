@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator.bmi;
+package pl.edu.pjatk.pamo.bmicalculator;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,11 +6,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import pl.edu.pjatk.pamo.bmicalculator.R;
+import pl.edu.pjatk.pamo.bmicalculator.fragments.PersonHealthDataFragment;
+import pl.edu.pjatk.pamo.bmicalculator.fragments.PersonHealthResultFragment;
 import pl.edu.pjatk.pamo.bmicalculator.model.Person;
 
-import static pl.edu.pjatk.pamo.bmicalculator.bmi.PersonHealthDataFragment.newInstanceStarFragment;
-import static pl.edu.pjatk.pamo.bmicalculator.bmi.PersonHealthResultFragment.newInstancePersonHealthResult;
+import static pl.edu.pjatk.pamo.bmicalculator.fragments.PersonHealthDataFragment.newInstanceStarFragment;
+import static pl.edu.pjatk.pamo.bmicalculator.fragments.PersonHealthResultFragment.newInstancePersonHealthResult;
 
 public class BmiActivity extends AppCompatActivity implements PersonHealthDataFragment.OnStartFragmentInteractionListener, PersonHealthResultFragment.OnPersonHealthResultListener {
     private FragmentManager fragmentManager;

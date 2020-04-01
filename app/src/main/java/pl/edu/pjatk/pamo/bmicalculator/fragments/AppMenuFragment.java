@@ -1,4 +1,4 @@
-package pl.edu.pjatk.pamo.bmicalculator;
+package pl.edu.pjatk.pamo.bmicalculator.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
+import pl.edu.pjatk.pamo.bmicalculator.R;
 
 
 /**

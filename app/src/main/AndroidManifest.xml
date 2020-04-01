@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.edu.pjatk.pamo.bmicalculator">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,11 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".quiz.QuizActivity"
-            android:label="@string/title_activity_quiz"
+            android:name=".ChartActivity"
+            android:label="@string/title_activity_chart"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".bmi.BmiActivity"
+            android:name=".QuizActivity"
+            android:label="@string/title_activity_quiz"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BmiActivity"
             android:label="@string/title_activity_bmi"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -32,5 +40,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 
 </manifest>
